@@ -1,0 +1,6 @@
+﻿<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
+  <vertical pref-height='40' bg='round-rect-panel' bg-color='#00000033' pad='5' vertical-fit='PreferredSize'>
+    <checkbox pref-width='50' text='Enabled' value='mod-enabled' apply-on-change='true'/>
+    <dropdown-list-setting text='Constellation' value='SelectedConstellation' choices='Constellations' on-change='OnConstellationSelected'/>
+  </vertical>
+</bg>

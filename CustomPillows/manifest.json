@@ -1,0 +1,12 @@
+﻿{
+  "$schema": "https://raw.githubusercontent.com/bsmg/BSIPA-MetadataFileSchema/master/Schema.json",
+  "id": "CustomPillows",
+  "name": "CustomPillows",
+  "author": "Toni Macaroni",
+  "version": "0.0.1",
+  "description": "Give your menu a little spice",
+  "gameVersion": "1.13.0",
+  "dependsOn": {
+    "BSIPA": "^4.0.5"
+  }
+}
