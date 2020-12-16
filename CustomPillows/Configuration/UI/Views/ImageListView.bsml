@@ -1,0 +1,25 @@
+﻿<vertical spacing="5" xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
+  <horizontal pref-height='70' spacing='5'>
+    <vertical spacing='2' pad='2' bg='round-rect-panel' bg-color='#00000033'>
+      <text font-align='Center' text='Loaded Waifus'/>
+      <page-button event-click='image-list-left#PageUp' direction='Up' />
+      <list id='image-list-left' select-cell='image-left-selected'/>
+      <page-button event-click='image-list-left#PageDown' direction='Down' />
+    </vertical>
+    <vertical>
+      <button pref-width='12' pref-height='12' text='&#129146;' on-click='click-add' />
+      <button pref-width='12' pref-height='12' text='&#129144;' on-click='click-remove' />
+    </vertical>
+    <vertical spacing='2' pad='2' bg='round-rect-panel' bg-color='#00000033'>
+      <text font-align='Center' text='Selected Waifus'/>
+      <page-button event-click='image-list-right#PageUp' direction='Up' />
+      <list id='image-list-right' select-cell='image-right-selected'/>
+      <page-button event-click='image-list-right#PageDown' direction='Down' />
+    </vertical>
+  </horizontal>
+  <horizontal bg='round-rect-panel' pad-right='5' bg-color='#00000033' pref-width='100' horizontal-fit='PreferredSize' child-align='MiddleCenter'>
+    <button text='Shuffle' on-click='click-shuffle' />
+    <!--<button text='Save' pref-width='20' on-click='click-save'/>
+    <button text='Scatter' pref-width='20' on-click='click-scatter'/>-->
+  </horizontal>
+</vertical>
