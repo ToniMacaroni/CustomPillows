@@ -9,12 +9,10 @@ using Zenject;
 
 namespace CustomPillows.Configuration.UI.Views
 {
-    //[ViewDefinition("CustomPillows.Configuration.UI.Views.SettingsView.bsml")]
-    //[HotReload(RelativePathToLayout = @"SettingsView.bsml")]
-    internal class SettingsView : /*BSMLAutomaticViewController*/ BSMLResourceViewController
+    [ViewDefinition("CustomPillows.Configuration.UI.Views.SettingsView")]
+    [HotReload(RelativePathToLayout = @"SettingsView")]
+    internal class SettingsView : BSMLAutomaticViewController
     {
-        public override string ResourceName => "CustomPillows.Configuration.UI.Views.SettingsView";
-
         public event Action<bool> OnModToggled; 
         public event Action<Constellation> OnConstellationChanged;
 
