@@ -2,8 +2,8 @@
 A Beat Saber mod that shouldn't exist (but yet it does)
 
 ## Installation
-1) download the first zip in [Releases](https://github.com/ToniMacaroni/CustomPillows/releases)
-2) extract the zip into your Beat Saber directory
+1) Download the first zip in [Releases](https://github.com/ToniMacaroni/CustomPillows/releases)
+2) Extract the zip into your Beat Saber directory
 
 ## Usage
 In-game you will see a mod panel on the left hand side which should include a "Custom Pillows" button.
