@@ -12,10 +12,12 @@ using Zenject;
 
 namespace CustomPillows.Configuration.UI.Views
 {
-    [ViewDefinition("CustomPillows.Configuration.UI.Views.ImageListView.bsml")]
-    [HotReload(RelativePathToLayout = @"ImageListView.bsml")]
-    internal class ImageListView : BSMLAutomaticViewController
+    //[ViewDefinition("CustomPillows.Configuration.UI.Views.ImageListView.bsml")]
+    //[HotReload(RelativePathToLayout = @"ImageListView.bsml")]
+    internal class ImageListView : /*BSMLAutomaticViewController*/ BSMLResourceViewController
     {
+        public override string ResourceName => "CustomPillows.Configuration.UI.Views.ImageListView";
+
         public event Action<IList<Texture2D>> OnSelectedTexturesChanged;
         public event Action OnSaveRequested;
         public event Action OnRefreshRequested;
@@ -136,6 +138,5 @@ namespace CustomPillows.Configuration.UI.Views
             list.data = cells;
             list.tableView.ReloadData();
         }
-
     }
 }
