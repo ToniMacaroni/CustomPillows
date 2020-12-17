@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using CustomPillows.Configuration;
 using IPA.Utilities;
+using SiraUtil.Tools;
 using UnityEngine;
 using Zenject;
 using File = System.IO.File;
@@ -11,7 +12,7 @@ namespace CustomPillows.Loaders
 {
     class Initializer : IInitializable
     {
-        private readonly CPLogger _logger;
+        private readonly SiraLog _logger;
         private readonly PluginConfig _config;
         private readonly PillowImageLoader _imageLoader;
         private readonly PillowPrefabLoader _prefabLoader;
@@ -19,7 +20,7 @@ namespace CustomPillows.Loaders
 
         public bool IsInitialized { get; private set; }
 
-        private Initializer(CPLogger logger, PluginConfig config, PillowImageLoader imageLoader, PillowPrefabLoader prefabLoader, PillowSpawner pillowSpawner)
+        private Initializer(SiraLog logger, PluginConfig config, PillowImageLoader imageLoader, PillowPrefabLoader prefabLoader, PillowSpawner pillowSpawner)
         {
             _logger = logger;
             _config = config;
@@ -38,6 +39,8 @@ namespace CustomPillows.Loaders
         {
             if (IsInitialized) yield break;
 
+            _logger.Info("Initializing");
+
             if (!_prefabLoader.IsLoaded)
             {
                 yield return _prefabLoader.LoadCoroutine(null);
@@ -47,8 +50,12 @@ namespace CustomPillows.Loaders
 
             if (!LoadConstellation()) yield break;
 
+            _logger.Info("Mod content loaded");
+
             _pillowSpawner.CanSpawn = true;
             _pillowSpawner.Refresh();
+
+            _logger.Info("Initialized");
 
             IsInitialized = true;
         }

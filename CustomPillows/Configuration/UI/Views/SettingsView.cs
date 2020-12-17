@@ -4,6 +4,7 @@ using System.Linq;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.ViewControllers;
 using CustomPillows.Loaders;
+using SiraUtil.Tools;
 using Zenject;
 
 
@@ -16,7 +17,7 @@ namespace CustomPillows.Configuration.UI.Views
         public event Action<bool> OnModToggled; 
         public event Action<Constellation> OnConstellationChanged;
 
-        private CPLogger _logger;
+        private SiraLog _logger;
         private PluginConfig _config;
         private ConstellationLoader _constellationLoader;
 
@@ -30,7 +31,7 @@ namespace CustomPillows.Configuration.UI.Views
         }
 
         [Inject]
-        private void Construct(CPLogger logger, PluginConfig config, ConstellationLoader constellationLoader)
+        private void Construct(SiraLog logger, PluginConfig config, ConstellationLoader constellationLoader)
         {
             _logger = logger;
             _config = config;

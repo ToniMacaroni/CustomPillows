@@ -1,5 +1,6 @@
 using CustomPillows.Loaders;
 using CustomPillows.TransformSetter;
+using SiraUtil.Tools;
 using UnityEngine;
 using Zenject;
 
@@ -9,7 +10,7 @@ namespace CustomPillows
     {
         private static readonly int _textureID = Shader.PropertyToID("_DetailAlbedoMap");
 
-        private CPLogger _logger;
+        private SiraLog _logger;
 
         public Transform CachedTransform;
         public Material Material;
@@ -22,7 +23,7 @@ namespace CustomPillows
         }
 
         [Inject]
-        private void Construct(CPLogger logger)
+        private void Construct(SiraLog logger)
         {
             _logger = logger;
         }
@@ -50,9 +51,9 @@ namespace CustomPillows
         {
             private readonly DiContainer _container;
             private readonly PillowPrefabLoader _prefabLoader;
-            private readonly CPLogger _logger;
+            private readonly SiraLog _logger;
 
-            private CustomFactory(DiContainer container, PillowPrefabLoader prefabLoader, CPLogger logger)
+            private CustomFactory(DiContainer container, PillowPrefabLoader prefabLoader, SiraLog logger)
             {
                 _container = container;
                 _prefabLoader = prefabLoader;

@@ -7,6 +7,7 @@ using BeatSaberMarkupLanguage.Components;
 using BeatSaberMarkupLanguage.ViewControllers;
 using CustomPillows.Loaders;
 using HMUI;
+using SiraUtil.Tools;
 using UnityEngine;
 using Zenject;
 
@@ -23,7 +24,7 @@ namespace CustomPillows.Configuration.UI.Views
         [UIComponent("image-list-left")] private readonly CustomListTableData _imageListLeft = null;
         [UIComponent("image-list-right")] private readonly CustomListTableData _imageListRight = null;
 
-        private CPLogger _logger;
+        private SiraLog _logger;
         private PluginConfig _config;
         private PillowImageLoader _pillowImageLoader;
 
@@ -34,7 +35,7 @@ namespace CustomPillows.Configuration.UI.Views
         private Texture2D _rightSelected;
 
         [Inject]
-        private void Construct(CPLogger logger, PluginConfig config, PillowImageLoader imageLoader)
+        private void Construct(SiraLog logger, PluginConfig config, PillowImageLoader imageLoader)
         {
             _logger = logger;
             _pillowImageLoader = imageLoader;

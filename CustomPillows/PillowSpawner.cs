@@ -4,6 +4,7 @@ using System.IO;
 using CustomPillows.Configuration;
 using CustomPillows.TransformSetter;
 using Newtonsoft.Json;
+using SiraUtil.Tools;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -15,7 +16,7 @@ namespace CustomPillows
         private IList<Texture2D> _texturePool;
         private Constellation _constellation;
 
-        private readonly CPLogger _logger;
+        private readonly SiraLog _logger;
         private readonly PluginConfig _config;
         private readonly Pillow.Factory _factory;
 
@@ -23,7 +24,7 @@ namespace CustomPillows
 
         public bool CanSpawn { get; set; }
 
-        private PillowSpawner(CPLogger logger, PluginConfig config, Pillow.Factory factory)
+        private PillowSpawner(SiraLog logger, PluginConfig config, Pillow.Factory factory)
         {
             _logger = logger;
             _config = config;

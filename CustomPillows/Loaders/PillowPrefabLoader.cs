@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using CustomPillows.Helpers;
+using SiraUtil.Tools;
 using UnityEngine;
 
 namespace CustomPillows.Loaders
@@ -9,13 +10,13 @@ namespace CustomPillows.Loaders
     {
         private static readonly string _bundlePath = $"Resources.pillows";
 
-        private readonly CPLogger _logger;
+        private readonly SiraLog _logger;
 
         public GameObject PillowPrefab { get; private set; }
 
         public bool IsLoaded { get; private set; }
 
-        private PillowPrefabLoader(CPLogger logger)
+        private PillowPrefabLoader(SiraLog logger)
         {
             _logger = logger;
         }
@@ -35,7 +36,7 @@ namespace CustomPillows.Loaders
         {
             if (!EmbeddedAssetLoader.TryLoadAssetBundle(_bundlePath, out var assetBundleCreateRequest))
             {
-                _logger.Log<PillowPrefabLoader>("Could not create request");
+                _logger.Warning("Could not create request");
                 yield break;
             }
 
@@ -43,7 +44,7 @@ namespace CustomPillows.Loaders
 
             if (!assetBundleCreateRequest.isDone || !assetBundleCreateRequest.assetBundle)
             {
-                _logger.Log<PillowPrefabLoader>("Could not load asset bundle");
+                _logger.Warning("Could not load asset bundle");
                 yield break;
             }
 
@@ -53,7 +54,7 @@ namespace CustomPillows.Loaders
             if (!assetBundleRequest.isDone || assetBundleRequest.asset == null)
             {
                 assetBundleCreateRequest.assetBundle.Unload(true);
-                _logger.Log<PillowPrefabLoader>("Could not load asset from asset bundle");
+                _logger.Warning("Could not load asset from asset bundle");
                 yield break;
             }
 
