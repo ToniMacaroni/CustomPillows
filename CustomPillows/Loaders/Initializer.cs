@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using CustomPillows.Configuration;
+using CustomPillows.Helpers;
 using IPA.Utilities;
+using IPA.Utilities.Async;
 using SiraUtil.Tools;
 using UnityEngine;
 using Zenject;
@@ -29,26 +32,23 @@ namespace CustomPillows.Loaders
             _pillowSpawner = pillowSpawner;
         }
 
-        public void Initialize()
+        public async void Initialize()
         {
             if (!_config.IsEnabled) return;
-            SharedCoroutineStarter.instance.StartCoroutine(Load());
+            await Load();
         }
 
-        public IEnumerator Load()
+        public async Task Load()
         {
-            if (IsInitialized) yield break;
+            if (IsInitialized) return;
 
             _logger.Info("Initializing");
 
-            if (!_prefabLoader.IsLoaded)
-            {
-                yield return _prefabLoader.LoadCoroutine(null);
-            }
+            await _prefabLoader.LoadAsync();
 
-            if (!LoadTextures()) yield break;
+            if (!await LoadTextures()) return;
 
-            if (!LoadConstellation()) yield break;
+            if (!await LoadConstellation()) return;
 
             _logger.Info("Mod content loaded");
 
@@ -60,7 +60,7 @@ namespace CustomPillows.Loaders
             IsInitialized = true;
         }
 
-        private bool LoadTextures()
+        private async Task<bool> LoadTextures()
         {
             if (string.IsNullOrWhiteSpace(_config.SelectedTextures)) return false;
 
@@ -71,7 +71,8 @@ namespace CustomPillows.Loaders
 
             foreach (var name in texNames)
             {
-                _imageLoader.Load(name);
+                await _imageLoader.LoadAsync(name);
+
                 if (_imageLoader.TryGetImage(name, out var tex))
                 {
                     textures.Add(tex);
@@ -83,18 +84,22 @@ namespace CustomPillows.Loaders
             return true;
         }
 
-        private bool LoadConstellation()
+        private async Task<bool> LoadConstellation()
         {
+            // first get the safe file "state"
             var fullPath = Path.Combine(UnityGame.UserDataPath, Plugin.Name, "state");
 
+            // if it doesn't exist, use a constellation
             if (!File.Exists(fullPath))
             {
                 fullPath = Path.Combine(UnityGame.UserDataPath, Plugin.Name, "Constellations", "Default");
             }
 
+            // if this also doesn't exist, return
             if (!File.Exists(fullPath)) return false;
 
-            var constellation = Constellation.FromString("state", File.ReadAllText(fullPath));
+            var text = await CommonExtensions.ReadFileTextAsync(fullPath);
+            var constellation = Constellation.FromStringAsync("state", text);
 
             _pillowSpawner.SetConstellation(constellation, false);
 

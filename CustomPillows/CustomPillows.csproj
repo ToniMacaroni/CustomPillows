@@ -139,7 +139,8 @@
     <Compile Include="Converters\Vector3Converter.cs" />
     <Compile Include="Exceptions\PillowPrefabLoadException.cs" />
     <Compile Include="Helpers\CommonExtensions.cs" />
-    <Compile Include="Helpers\EmbeddedAssetLoader.cs" />
+    <Compile Include="Helpers\EmbeddedAssetUtilities.cs" />
+    <Compile Include="Helpers\UIHelpers.cs" />
     <Compile Include="Installers\CustomPillowsAppInstaller.cs" />
     <Compile Include="Installers\CustomPillowsGameInstaller.cs" />
     <Compile Include="Loaders\Initializer.cs" />

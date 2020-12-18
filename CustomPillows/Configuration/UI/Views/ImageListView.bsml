@@ -1,5 +1,5 @@
-﻿<vertical spacing="5" xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
-  <horizontal pref-height='70' spacing='5'>
+﻿<vertical spacing="5" pad-top="1" xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
+  <horizontal spacing='5' pref-height='72'>
     <vertical spacing='2' pad='2' bg='round-rect-panel' bg-color='#00000033'>
       <text font-align='Center' text='Loaded Waifus'/>
       <page-button event-click='image-list-left#PageUp' direction='Up' />

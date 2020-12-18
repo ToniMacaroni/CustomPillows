@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using CustomPillows.Helpers;
 using IPA.Utilities;
 
 namespace CustomPillows.Loaders
@@ -20,14 +22,16 @@ namespace CustomPillows.Loaders
             _constellationDirectory.Create();
         }
 
-        public void Load()
+        public async Task LoadAsync()
         {
             if (IsLoaded) return;
 
             foreach (var file in _constellationDirectory.EnumerateFiles())
             {
                 var name = file.Name;
-                Constellations.Add(name, Constellation.FromString(name, File.ReadAllText(file.FullName)));
+                var fileContent = await file.ReadFileTextAsync();
+                var constellation = Constellation.FromStringAsync(name, fileContent);
+                Constellations.Add(name, constellation);
             }
 
             IsLoaded = true;

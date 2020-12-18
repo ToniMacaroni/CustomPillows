@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using BeatSaberMarkupLanguage;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.Components;
 using BeatSaberMarkupLanguage.ViewControllers;
+using CustomPillows.Helpers;
 using CustomPillows.Loaders;
 using HMUI;
 using SiraUtil.Tools;
@@ -43,15 +46,13 @@ namespace CustomPillows.Configuration.UI.Views
         }
 
         [UIAction("#post-parse")]
-        private void Setup()
+        private async void Setup()
         {
-            if (!_pillowImageLoader.IsLoaded)
-            {
-                _pillowImageLoader.LoadAll();
-            }
+            await _pillowImageLoader.LoadAllAsync();
 
             _leftTextures = _pillowImageLoader.Images.Values.ToList();
             _rightTextures = new HashSet<Texture2D>();
+
             LoadSelectedTexturesFromConfig();
 
             RefreshLists();
@@ -118,11 +119,13 @@ namespace CustomPillows.Configuration.UI.Views
         public void RefreshLeftList()
         {
             FillList(_imageListLeft, _leftTextures);
+            //_imageListLeft.ReloadListSize();
         }
 
         public void RefreshRightList()
         {
             FillList(_imageListRight, _rightTextures);
+            //_imageListRight.ReloadListSize();
         }
 
         private void FillList(CustomListTableData list, IEnumerable<Texture2D> textures)

@@ -31,13 +31,13 @@ namespace CustomPillows.Configuration.UI.Views
         }
 
         [Inject]
-        private void Construct(SiraLog logger, PluginConfig config, ConstellationLoader constellationLoader)
+        private async void Construct(SiraLog logger, PluginConfig config, ConstellationLoader constellationLoader)
         {
             _logger = logger;
             _config = config;
             _constellationLoader = constellationLoader;
 
-            _constellationLoader.Load();
+            await _constellationLoader.LoadAsync();
 
             FillConstellations();
         }
