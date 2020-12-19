@@ -44,8 +44,8 @@ namespace CustomPillows.Loaders
             var file = _imageDirectory.File(name + ".png");
             if (!skipCheck && !file.Exists) return;
 
-            var tex = await LoadTextureAsync(file.FullName);
-            tex.name = name;
+            var data = await file.ReadFileDataAsync();
+            var tex = CommonExtensions.CreateTexture(data, name);
 
             Images.Add(name, tex);
         }
@@ -58,6 +58,7 @@ namespace CustomPillows.Loaders
 
             req.SendWebRequest().completed += delegate
             {
+
                 completionSource.TrySetResult(((DownloadHandlerTexture) req.downloadHandler).texture);
             };
 

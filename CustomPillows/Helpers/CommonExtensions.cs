@@ -1,6 +1,8 @@
 ﻿using System.IO;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace CustomPillows.Helpers
 {
@@ -36,6 +38,14 @@ namespace CustomPillows.Helpers
             await sourceStream.ReadAsync(data, 0, data.Length);
 
             return data;
+        }
+
+        public static Texture2D CreateTexture(byte[] data, string name)
+        {
+            var tex = new Texture2D(2, 2);
+            tex.LoadImage(data);
+            tex.name = name;
+            return tex;
         }
     }
 }
