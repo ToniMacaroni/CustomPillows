@@ -21,14 +21,6 @@ namespace CustomPillows.Installers
         {
             Container.BindLoggerAsSiraLogger(_logger);
             Container.BindInstance(_config).AsSingle();
-
-            Container.Bind<PillowPrefabLoader>().AsSingle();
-            Container.Bind<PillowImageLoader>().AsSingle();
-            Container.Bind<ConstellationLoader>().AsSingle();
-            Container.BindInterfacesAndSelfTo<PillowSpawner>().AsSingle();
-            Container.BindInterfacesAndSelfTo<Initializer>().AsSingle();
-
-            Container.BindFactory<Pillow, Pillow.Factory>().FromFactory<Pillow.CustomFactory>();
         }
     }
 }

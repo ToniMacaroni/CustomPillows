@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using CustomPillows.Helpers;
@@ -7,6 +9,7 @@ using IPA.Utilities;
 using IPA.Utilities.Async;
 using SiraUtil.Tools;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace CustomPillows.Loaders
 {
@@ -41,12 +44,24 @@ namespace CustomPillows.Loaders
             var file = _imageDirectory.File(name + ".png");
             if (!skipCheck && !file.Exists) return;
 
-            var data = await file.ReadFileDataAsync();
-            var tex = new Texture2D(2, 2);
-            tex.LoadImage(data);
+            var tex = await LoadTextureAsync(file.FullName);
             tex.name = name;
 
             Images.Add(name, tex);
+        }
+
+        private async Task<Texture2D> LoadTextureAsync(string path)
+        {
+            var completionSource = new TaskCompletionSource<Texture2D>();
+
+            UnityWebRequest req = UnityWebRequestTexture.GetTexture("file://" + path);
+
+            req.SendWebRequest().completed += delegate
+            {
+                completionSource.TrySetResult(((DownloadHandlerTexture) req.downloadHandler).texture);
+            };
+
+            return await completionSource.Task;
         }
 
         /// <summary>
