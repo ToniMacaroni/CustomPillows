@@ -13,8 +13,8 @@ namespace CustomPillows.Installers
             Container.BindInterfacesAndSelfTo<Initializer>().AsSingle();
 
             // UI stuff
-            Container.BindViewController<ImageListView>();
-            Container.BindViewController<SettingsView>();
+            Container.Bind<ImageListView>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<SettingsView>().FromNewComponentAsViewController().AsSingle();
 
             Container.BindFlowCoordinator<PillowFlowCoordinator>();
             Container.BindInterfacesTo<MenuButtonManager>().AsSingle();
