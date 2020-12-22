@@ -67,10 +67,7 @@ namespace CustomPillows.Helpers
                     assetBundleRequest.completed += delegate
                     {
                         T asset = (T) assetBundleRequest.asset;
-                        if (asset == null)
-                        {
-                            assetBundle.Unload(true);
-                        }
+                        assetBundle.Unload(asset==null);
 
                         result.Success = true;
                         result.Asset = asset;
