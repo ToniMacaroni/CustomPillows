@@ -9,7 +9,7 @@ A Beat Saber mod that shouldn't exist (but yet it does)
 In-game you will see a mod panel on the left hand side which should include a "Custom Pillows" button.
 Click it to go into the mod settings.
 
-1) Select an image in the right list and click the arrow pointing to the right to use it on your pillows
+1) Select an image in the left list and click the arrow pointing to the right to use it on your pillows
 2) Do that for any image you would like to add
 3) On the right panel select an "constellation" to change the arrangement of the pillows
 4) If you are unhappy with how the textures are layed out click the "Shuffle" button on the bottom in the middle panel
