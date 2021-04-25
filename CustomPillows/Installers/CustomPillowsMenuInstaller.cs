@@ -16,7 +16,7 @@ namespace CustomPillows.Installers
             Container.Bind<ImageListView>().FromNewComponentAsViewController().AsSingle();
             Container.Bind<SettingsView>().FromNewComponentAsViewController().AsSingle();
 
-            Container.BindFlowCoordinator<PillowFlowCoordinator>();
+            Container.Bind<PillowFlowCoordinator>().FromNewComponentOnNewGameObject().AsSingle();
             Container.BindInterfacesTo<MenuButtonManager>().AsSingle();
 
             
