@@ -83,6 +83,7 @@ namespace CustomPillows.Configuration.UI.Views
         [UIAction("click-add")]
         private void OnClickAdd()
         {
+            if (_leftSelected == null) return;
             _rightTextures.Add(_leftSelected);
             RefreshRightList();
 
@@ -119,13 +120,11 @@ namespace CustomPillows.Configuration.UI.Views
         public void RefreshLeftList()
         {
             FillList(_imageListLeft, _leftTextures);
-            //_imageListLeft.ReloadListSize();
         }
 
         public void RefreshRightList()
         {
             FillList(_imageListRight, _rightTextures);
-            //_imageListRight.ReloadListSize();
         }
 
         private void FillList(CustomListTableData list, IEnumerable<Texture2D> textures)
