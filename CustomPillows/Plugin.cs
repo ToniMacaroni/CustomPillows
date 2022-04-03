@@ -11,6 +11,7 @@ namespace CustomPillows
 {
 
     [Plugin(RuntimeOptions.SingleStartInit)]
+    [NoEnableDisable]
     public class Plugin
     {
 
@@ -21,19 +22,11 @@ namespace CustomPillows
         {
             Name = Assembly.GetExecutingAssembly().GetName().Name;
 
-            zenjector.OnApp<CustomPillowsAppInstaller>().WithParameters(conf.Generated<PluginConfig>(), logger);
-            zenjector.OnMenu<CustomPillowsMenuInstaller>();
-            zenjector.OnGame<CustomPillowsGameInstaller>();
-        }
-
-        [OnStart]
-        public void OnApplicationStart()
-        {
-        }
-
-        [OnExit]
-        public void OnApplicationQuit()
-        {
+            zenjector.UseLogger(logger);
+            
+            zenjector.Install<CustomPillowsAppInstaller>(Location.App, conf.Generated<PluginConfig>());
+            zenjector.Install<CustomPillowsMenuInstaller>(Location.Menu);
+            zenjector.Install<CustomPillowsGameInstaller>(Location.GameCore);
         }
     }
 }
