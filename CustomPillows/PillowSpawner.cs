@@ -6,6 +6,7 @@ using CustomPillows.Configuration;
 using CustomPillows.Loaders;
 using CustomPillows.TransformSetter;
 using Newtonsoft.Json;
+using SiraUtil.Logging;
 using SiraUtil.Tools;
 using UnityEngine;
 using Object = UnityEngine.Object;
