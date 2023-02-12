@@ -1,6 +1,5 @@
 using CustomPillows.Configuration;
 using CustomPillows.Loaders;
-using SiraUtil;
 using Zenject;
 using Logger = IPA.Logging.Logger;
 
@@ -19,7 +18,6 @@ namespace CustomPillows.Installers
 
         public override void InstallBindings()
         {
-            Container.BindLoggerAsSiraLogger(_logger);
             Container.BindInstance(_config).AsSingle();
 
             Container.Bind<PillowPrefabLoader>().AsSingle();

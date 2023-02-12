@@ -3,12 +3,12 @@
   "id": "CustomPillows",
   "name": "CustomPillows",
   "author": "Toni Macaroni",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Give your menu a little spice",
-  "gameVersion": "1.16.1",
+  "gameVersion": "1.27.0",
   "dependsOn": {
-    "BSIPA": "^4.1.6",
-    "SiraUtil": "^2.5.5",
-    "BeatSaberMarkupLanguage": "^1.5.3"
+    "BSIPA": "^4.2.2",
+    "SiraUtil": "^3.1.2",
+    "BeatSaberMarkupLanguage": "^1.6.8"
   }
 }

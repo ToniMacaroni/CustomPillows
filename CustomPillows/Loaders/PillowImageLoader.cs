@@ -1,13 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using CustomPillows.Helpers;
 using IPA.Utilities;
-using IPA.Utilities.Async;
-using SiraUtil.Tools;
+using SiraUtil.Logging;
 using UnityEngine;
 using UnityEngine.Networking;
 
