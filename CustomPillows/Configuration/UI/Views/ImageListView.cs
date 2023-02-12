@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using BeatSaberMarkupLanguage;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.Components;
 using BeatSaberMarkupLanguage.ViewControllers;
-using CustomPillows.Helpers;
 using CustomPillows.Loaders;
 using HMUI;
-using SiraUtil.Tools;
+using SiraUtil.Logging;
 using UnityEngine;
 using Zenject;
 

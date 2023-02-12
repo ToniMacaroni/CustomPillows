@@ -4,7 +4,7 @@ using System.Linq;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.ViewControllers;
 using CustomPillows.Loaders;
-using SiraUtil.Tools;
+using SiraUtil.Logging;
 using Zenject;
 
 

@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using System.Threading.Tasks;
-using SiraUtil.Tools;
 using UnityEngine;
 
 namespace CustomPillows.Helpers

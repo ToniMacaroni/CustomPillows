@@ -1,7 +1,6 @@
 ﻿using CustomPillows.Configuration.UI;
 using CustomPillows.Configuration.UI.Views;
 using CustomPillows.Loaders;
-using SiraUtil;
 using Zenject;
 
 namespace CustomPillows.Installers
