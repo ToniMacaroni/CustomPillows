@@ -19,11 +19,13 @@ namespace CustomPillows
         [Init]
         public void Init(IPALogger logger, Config conf, Zenjector zenjector)
         {
+            zenjector.UseLogger(logger);
+
             Name = Assembly.GetExecutingAssembly().GetName().Name;
 
-            zenjector.OnApp<CustomPillowsAppInstaller>().WithParameters(conf.Generated<PluginConfig>(), logger);
-            zenjector.OnMenu<CustomPillowsMenuInstaller>();
-            zenjector.OnGame<CustomPillowsGameInstaller>();
+            zenjector.Install<CustomPillowsAppInstaller>(Location.App, new object[] { conf.Generated<PluginConfig>() });
+            zenjector.Install<CustomPillowsMenuInstaller>(Location.Menu);
+            zenjector.Install<CustomPillowsGameInstaller>(Location.GameCore);
         }
 
         [OnStart]

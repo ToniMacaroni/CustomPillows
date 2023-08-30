@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Threading.Tasks;
 using CustomPillows.Helpers;
-using SiraUtil.Tools;
+using SiraUtil.Logging;
 using UnityEngine;
 
 namespace CustomPillows.Loaders

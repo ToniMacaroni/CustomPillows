@@ -1,6 +1,6 @@
 using CustomPillows.Loaders;
 using CustomPillows.TransformSetter;
-using SiraUtil.Tools;
+using SiraUtil.Logging;
 using UnityEngine;
 using Zenject;
 

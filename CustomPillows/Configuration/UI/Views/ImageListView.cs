@@ -10,7 +10,7 @@ using BeatSaberMarkupLanguage.ViewControllers;
 using CustomPillows.Helpers;
 using CustomPillows.Loaders;
 using HMUI;
-using SiraUtil.Tools;
+using SiraUtil.Logging;
 using UnityEngine;
 using Zenject;
 

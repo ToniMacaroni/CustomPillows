@@ -7,7 +7,7 @@ using CustomPillows.Configuration;
 using CustomPillows.Helpers;
 using IPA.Utilities;
 using IPA.Utilities.Async;
-using SiraUtil.Tools;
+using SiraUtil.Logging;
 using UnityEngine;
 using Zenject;
 using File = System.IO.File;
