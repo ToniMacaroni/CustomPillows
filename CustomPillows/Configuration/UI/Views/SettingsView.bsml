@@ -1,6 +1,9 @@
 ﻿<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
-  <vertical pref-height='40' bg='round-rect-panel' bg-color='#00000033' pad='5' vertical-fit='PreferredSize'>
-    <checkbox pref-width='50' text='Enabled' value='mod-enabled' apply-on-change='true'/>
-    <dropdown-list-setting text='Constellation' value='SelectedConstellation' choices='Constellations' on-change='OnConstellationSelected'/>
+  <vertical pref-height='50' bg='round-rect-panel' bg-color='#00000033' pad='5' vertical-fit='PreferredSize'>
+    <checkbox pref-width='50' text='Enabled' hover-hint='Whether the pillows are shown at all' value='mod-enabled' apply-on-change='true'/>
+    <dropdown-list-setting text='Constellation' hover-hint='How the pillows are arranged' value='SelectedConstellation' choices='Constellations' on-change='OnConstellationSelected'/>
+	<toggle-setting text='Blåhajs' value='MixInBlahaj' apply-on-change='true' hover-hint='Mixes in blåhajs into the pillows'/>
+	<slider-setting id='blahaj-threshold' text='Blåhaj%' value='BlahajThreshold' apply-on-change='true' hover-hint='Percent of pillows that turn into blåhajs' min='0' max='100' increment='5' digits='0' interactable='~MixInBlahaj'/>
+	<toggle-setting id='blahaj-random' text='Random Color Blåhaj' value='RandomColors' apply-on-change='true' hover-hint='Assign random colors to the blahaj' interactable='~MixInBlahaj'/>
   </vertical>
 </bg>
