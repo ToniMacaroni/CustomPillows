@@ -157,6 +157,7 @@
     <Compile Include="Helpers\EmbeddedAssetUtilities.cs" />
     <Compile Include="Installers\CustomPillowsAppInstaller.cs" />
     <Compile Include="Installers\CustomPillowsGameInstaller.cs" />
+    <Compile Include="IPillow.cs" />
     <Compile Include="Loaders\Initializer.cs" />
     <Compile Include="Constellation.cs" />
     <Compile Include="Loaders\ConstellationLoader.cs" />
@@ -191,6 +192,7 @@
     <None Include="Directory.Build.targets" Condition="Exists('Directory.Build.targets')" />
     <None Include="CustomPillows.csproj.user" Condition="Exists('CustomPillows.csproj.user')" />
     <EmbeddedResource Include="Resources\pillows" />
+    <EmbeddedResource Include="Resources\blahaj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BeatSaberModdingTools.Tasks">

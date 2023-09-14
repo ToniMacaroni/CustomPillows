@@ -6,8 +6,9 @@ using CustomPillows.Configuration;
 using CustomPillows.Loaders;
 using CustomPillows.TransformSetter;
 using Newtonsoft.Json;
-using SiraUtil.Tools;
+using SiraUtil.Logging;
 using UnityEngine;
+using Zenject;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
@@ -20,19 +21,21 @@ namespace CustomPillows
 
         private readonly SiraLog _logger;
         private readonly PluginConfig _config;
-        private readonly Pillow.Factory _factory;
+        private readonly Pillow.Factory _bodyPillowFactory;
+        private readonly Blahaj.Factory _blahajFactory;
 
-        private readonly IList<Pillow> _spawnedPillows;
+        private readonly IList<IPillow> _spawnedPillows;
 
         public bool CanSpawn { get; set; }
 
-        private PillowSpawner(SiraLog logger, PluginConfig config, Pillow.Factory factory)
+        private PillowSpawner(SiraLog logger, PluginConfig config, Pillow.Factory bodyPillowFactory, Blahaj.Factory blahajFactory)
         {
             _logger = logger;
             _config = config;
-            _factory = factory;
+            _bodyPillowFactory = bodyPillowFactory;
+            _blahajFactory = blahajFactory;
 
-            _spawnedPillows = new List<Pillow>();
+            _spawnedPillows = new List<IPillow>();
 
             _texturePool = new List<Texture2D>();
         }
@@ -63,10 +66,11 @@ namespace CustomPillows
             for (var i = 0; i < _constellation.TransformDataCollections.Count; i++)
             {
                 var collection = _constellation.TransformDataCollections[i];
-                var options = new Pillow.PillowParams
+                var options = new PillowParams
                 {
                     TransformSetter = new AdvancedTransformSetter(collection.TransformData),
-                    Texture = shuffledList[i]
+                    Texture = shuffledList[i],
+                    Shape = shuffledList[i] == null ? PillowParams.PillowShape.Blahaj : PillowParams.PillowShape.Body
                 };
 
                 Spawn(options);
@@ -78,8 +82,12 @@ namespace CustomPillows
             var newArr = new List<Texture2D>(length);
             for (int i = 0; i < length; i++)
             {
-                newArr.Add(input[i % input.Count]);
+                if (_config.MixInBlahaj && i < (length * _config.BlahajThreshold))
+                    newArr.Add(null);
+                else 
+                    newArr.Add(input[i % input.Count]);
             }
+
             newArr.ShuffleInPlace();
             return newArr;
         }
@@ -97,21 +105,36 @@ namespace CustomPillows
                     Scale = Vector3.one
                 });
 
-                var options = new Pillow.PillowParams
+                Texture2D tex = null;
+                if (!_config.MixInBlahaj || i > (spawnParams.Amount * _config.BlahajThreshold))
+                    tex = spawnParams.Textures[Random.Range(0, spawnParams.Textures.Count)];
+                
+                var options = new PillowParams
                 {
                     TransformSetter = tSetter,
-                    Texture = spawnParams.Textures[Random.Range(0, spawnParams.Textures.Count)]
+                    Texture = tex,
+                    Shape = tex == null ? PillowParams.PillowShape.Blahaj : PillowParams.PillowShape.Body
                 };
 
                 Spawn(options);
             }
         }
 
-        private void Spawn(Pillow.PillowParams spawnParams)
+        private void Spawn(PillowParams spawnParams)
         {
             if (!CanSpawn) return;
 
-            var pillow = _factory.Create();
+            IPillow pillow = null;
+            switch (spawnParams.Shape)
+            {
+                case PillowParams.PillowShape.None: return;
+                case PillowParams.PillowShape.Body:
+                    pillow = _bodyPillowFactory.Create();
+                    break;
+                case PillowParams.PillowShape.Blahaj: 
+                    pillow = _blahajFactory.Create();
+                    break;
+            }
 
             pillow.Init(spawnParams);
 
@@ -123,14 +146,14 @@ namespace CustomPillows
             if (idx > _spawnedPillows.Count - 1) return;
             var pillow = _spawnedPillows[idx];
             _spawnedPillows.RemoveAt(idx);
-            Object.Destroy(pillow.gameObject);
+            Object.Destroy(pillow.CachedGameObject);
         }
 
         public void DespawnAll()
         {
             for (int i = 0; i < _spawnedPillows.Count; i++)
             {
-                Object.Destroy(_spawnedPillows[i].gameObject);
+                Object.Destroy(_spawnedPillows[i].CachedGameObject);
             }
 
             _spawnedPillows.Clear();
@@ -155,7 +178,7 @@ namespace CustomPillows
         {
             foreach (var spawnedPillow in _spawnedPillows)
             {
-                spawnedPillow.gameObject.SetActive(active);
+                spawnedPillow.CachedGameObject.SetActive(active);
             }
         }
 
